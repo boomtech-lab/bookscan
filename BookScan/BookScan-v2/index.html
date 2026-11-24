@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BookScan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0b0d10">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BookScan">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <section id="home">
+    <div class="homeTop">
+      <h1>BookScan</h1>
+      <p>Each project is its own PDF. Open one to keep adding pages, or start a new one.</p>
+      <button id="btnNew" class="main wide">New project</button>
+    </div>
+    <div id="projList"></div>
+    <div id="ver"></div>
+  </section>
+
+  <section id="scan" class="hidden">
+    <video id="cam" playsinline muted autoplay></video>
+    <canvas id="ov"></canvas>
+    <div id="flash"></div>
+
+    <header id="top">
+      <button id="btnBack" class="chip">Done</button>
+      <div id="bookTitle"></div>
+      <button id="btnSet" class="chip">Settings</button>
+    </header>
+
+    <div id="status">Starting</div>
+    <div id="ocrState"></div>
+    <div id="diag"></div>
+
+    <section id="bottom">
+      <div id="thumbs"></div>
+      <div id="controls">
+        <button id="btnUndo" class="side" disabled>Undo</button>
+        <button id="btnMain" class="main">Pause</button>
+        <button id="btnExport" class="side" disabled>Export</button>
+      </div>
+      <button id="btnShutter" class="link">Capture now</button>
+    </section>
+
+    <div id="camMsg" class="hidden">
+      <p id="camErr"></p>
+      <button id="btnRetry" class="main">Try again</button>
+    </div>
+  </section>
+
+  <div id="sheetName" class="sheet"><div class="card">
+    <h2 id="nameTitle">Project name</h2>
+    <input id="nameInput" type="text" maxlength="60" autocomplete="off">
+    <button id="btnNameOk" class="main wide">Save</button>
+    <button class="link close">Cancel</button>
+  </div></div>
+
+  <div id="sheetMore" class="sheet"><div class="card">
+    <h2 id="moreTitle">Project</h2>
+    <button id="btnRename" class="main wide alt">Rename</button>
+    <button id="btnClear" class="main wide alt">Remove all pages, keep project</button>
+    <button id="btnDelProj" class="main wide danger">Delete project</button>
+    <button class="link close">Close</button>
+  </div></div>
+
+  <div id="sheetSet" class="sheet"><div class="card">
+    <h2>Settings</h2>
+    <label class="row"><span>Layout</span>
+      <select id="setMode"><option value="spread">Two-page spread</option><option value="single">Single page</option></select></label>
+    <label class="row"><span>Clean-up</span>
+      <select id="setClean"><option value="strong">Strong (black text, white page)</option><option value="light">Light (grayscale)</option><option value="off">Off (color)</option></select></label>
+    <label class="row"><span>Auto-capture</span>
+      <select id="setSens"><option value="1.6">Relaxed</option><option value="1">Normal</option><option value="0.65">Strict</option></select></label>
+    <label class="row"><span>Hold-still time</span>
+      <select id="setHold"><option value="500">Fast</option><option value="800">Normal</option><option value="1300">Slow</option></select></label>
+    <label class="row"><span>Full-resolution photo (Android Chrome)</span><input type="checkbox" id="setHires"></label>
+    <label class="row"><span>Sound and vibration</span><input type="checkbox" id="setSound"></label>
+    <label class="row"><span>Show diagnostics</span><input type="checkbox" id="setDiag"></label>
+    <button class="link close">Close</button>
+  </div></div>
+
+  <div id="sheetExp" class="sheet"><div class="card">
+    <h2>Export</h2>
+    <p id="expInfo"></p>
+    <button id="btnShare" class="main wide" disabled>Share or save PDF</button>
+    <button id="btnOpen" class="main wide alt" disabled>Open PDF</button>
+    <button id="btnShareTxt" class="main wide alt" disabled>Share text</button>
+    <button id="btnCopy" class="main wide alt" disabled>Copy text</button>
+    <button id="btnDownload" class="link" disabled>Download PDF</button>
+    <p id="expMsg"></p>
+    <button class="link close">Close</button>
+  </div></div>
+
+  <div id="sheetPage" class="sheet"><div class="card">
+    <h2 id="pgTitle">Page</h2>
+    <img id="pgImg" alt="">
+    <button id="btnDelPage" class="main wide danger">Delete this page</button>
+    <button class="link close">Close</button>
+  </div></div>
+</div>
+
+<script src="lib/tesseract.min.js"></script>
+<script src="lib/pdf-lib.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
