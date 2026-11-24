@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BookScan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0b0d10">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BookScan">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <video id="cam" playsinline muted autoplay></video>
+  <div id="guide"><div id="gutter"></div></div>
+  <div id="flash"></div>
+
+  <header id="top">
+    <button id="btnLib" class="chip" aria-label="Books">Books</button>
+    <div id="bookTitle">No book</div>
+    <button id="btnSet" class="chip" aria-label="Settings">Settings</button>
+  </header>
+
+  <div id="status">Tap Start</div>
+  <div id="ocrState"></div>
+
+  <section id="bottom">
+    <div id="thumbs"></div>
+    <div id="controls">
+      <button id="btnUndo" class="side" disabled>Undo</button>
+      <button id="btnMain" class="main">Start</button>
+      <button id="btnExport" class="side" disabled>Export</button>
+    </div>
+    <button id="btnShutter" class="link">Capture now</button>
+  </section>
+
+  <div id="splash">
+    <h1>BookScan</h1>
+    <p>Hold your phone flat over an open book, camera pointed at the spread. Keep the crease near the center line. Turn the page and hold still. It captures on its own.</p>
+    <button id="btnBegin" class="main wide">Open camera</button>
+    <p id="camErr" class="err"></p>
+  </div>
+
+  <div id="sheetLib" class="sheet"><div class="card">
+    <h2>Books</h2>
+    <div id="bookList"></div>
+    <button id="btnNewBook" class="main wide">New book</button>
+    <button class="link close">Close</button>
+  </div></div>
+
+  <div id="sheetSet" class="sheet"><div class="card">
+    <h2>Settings</h2>
+    <label class="row"><span>Layout</span>
+      <select id="setMode"><option value="spread">Two-page spread</option><option value="single">Single page</option></select></label>
+    <label class="row"><span>Clean up (flatten shadows, boost contrast)</span><input type="checkbox" id="setEnhance"></label>
+    <label class="row"><span>Full-resolution photo (Android Chrome)</span><input type="checkbox" id="setHires"></label>
+    <label class="row"><span>Hold-still time</span>
+      <select id="setHold"><option value="500">Fast</option><option value="800">Normal</option><option value="1300">Slow</option></select></label>
+    <label class="row"><span>Sound and vibration</span><input type="checkbox" id="setSound"></label>
+    <button class="link close">Close</button>
+  </div></div>
+
+  <div id="sheetExp" class="sheet"><div class="card">
+    <h2>Export</h2>
+    <p id="expInfo"></p>
+    <button id="btnPdf" class="main wide">Searchable PDF</button>
+    <button id="btnTxt" class="main wide alt">Plain text</button>
+    <p id="expMsg"></p>
+    <button class="link close">Close</button>
+  </div></div>
+
+  <div id="sheetPage" class="sheet"><div class="card">
+    <h2 id="pgTitle">Page</h2>
+    <img id="pgImg" alt="">
+    <button id="btnDelPage" class="main wide danger">Delete this page</button>
+    <button class="link close">Close</button>
+  </div></div>
+</div>
+
+<script src="lib/tesseract.min.js"></script>
+<script src="lib/pdf-lib.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
